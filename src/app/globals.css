@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    background-color: #080808;
+    color: #ffffff;
+    scroll-behavior: smooth;
+    /* anchors (#security, #interview-ethics …) must not hide under the fixed navbar */
+    scroll-padding-top: 6rem;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: #080808;
+    color: #ffffff;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: rgba(244, 119, 53, 0.3);
+    color: #ffffff;
+  }
+
+  /* One consistent, visible keyboard focus ring everywhere */
+  :focus-visible {
+    outline: 2px solid #f47735;
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: none; /* inputs already switch their border colour on focus */
+  }
+
+  /* Slim, dark scrollbars */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    border: 2px solid #080808;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(244, 119, 53, 0.55);
+  }
+
+  /* Honour the OS "reduce motion" setting */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .xavan-container {
+    @apply mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:px-10;
+  }
+
+  .xavan-glass {
+    background: rgba(16, 16, 16, 0.72);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .xavan-card {
+    @apply rounded-2xl bg-[#101010] border border-white/10 transition-all duration-300;
+  }
+
+  .xavan-card:hover {
+    @apply border-[#F47735]/40 shadow-orange-subtle;
+  }
+
+  /* Subtle lift for linked cards */
+  a.xavan-card:hover {
+    transform: translateY(-3px);
+  }
+
+  /* Soft animated grid used behind hero sections */
+  .xavan-grid-bg {
+    background-image: linear-gradient(to right, rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 80%);
+  }
+
+  /* Form controls share one look */
+  .xavan-input {
+    @apply w-full rounded-xl border border-white/10 bg-[#080808] px-4 py-3 text-sm text-white placeholder:text-zinc-600 transition-colors focus:border-[#F47735] focus:outline-none;
+  }
+}
